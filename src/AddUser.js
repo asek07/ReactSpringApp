@@ -53,7 +53,7 @@ class AddUser extends Component {
     showNotification() {
       if(this.state.success === true) {
         return <div className="alert alert-success" role="alert">
-                  <h6 className="notification-message">Successfully added {this.state.name} to DB.</h6>
+                  <h6 className="notification-message">Successfully added {this.state.name} to database.</h6>
                </div>
       }
       else if(this.state.success === null) {
@@ -61,7 +61,7 @@ class AddUser extends Component {
       }
       else {
         return <div className="alert alert-danger" role="alert">
-                  <h6 className="notification-message">Failed to add {this.state.name} to DB.</h6>
+                  <h6 className="notification-message">Failed to add {this.state.name} to database.</h6>
                </div>
       }
     }

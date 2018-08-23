@@ -53,18 +53,19 @@ class UserTable extends Component {
         success: true
       })
 
+      this.getUsers();
+
       setTimeout(()=> {
         this.setState({
           success: null
         })
-        this.getUsers();
       }, 3000)
     });
   }
 
     showNotification() {
       if(this.state.success === true) {
-        return <div className="alert alert-success" role="alert">
+        return <div className="alert alert-info" role="alert">
                   <h5 className="notification-message">Successfully deleted user from database.</h5>
                </div>
       }
