@@ -8,26 +8,58 @@ class AddUser extends Component {
     super(props);
     this.state = {
       name: "",
-      colour: ""
+      fave_colour: "",
+      success: null
     }
 
     this.addUserToDB = this.addUserToDB.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleColourChange = this.handleColourChange.bind(this);
+    this.showNotification = this.showNotification.bind(this);
   }
 
   addUserToDB() {
-    if(this.state.name !== "" && this.state.colour !== "") {
-      fetch('http://localhost:8080/users/addUser', {
-   method: 'POST',
-   body: {
-    "name": this.state.name,
-    "colour": this.state.colour
-   }
-  });
- };
+    if(this.state.name !== "" && this.state.fave_colour !== "") {
+      fetch('http://localhost:8080/users/addUser?name=' + this.state.name +"&fave_colour=" + this.state.fave_colour, {
+       method: 'POST',
+       body: {
+        "name": this.state.name,
+        "fave_colour": this.state.fave_colour
+       }
+      });
+
+      this.setState({
+        success: true
+      })
+
+      setTimeout(()=> {
+        this.setState({
+          success: null
+        })
+        window.location.reload();
+      }, 3000)
+
+     }
+     else {
+       console.log("not working for some reason...");
+     }
     }
 
+    showNotification() {
+      if(this.state.success === true) {
+        return <div className="alert alert-success" role="alert">
+                  <h5>Successfully added {this.state.name} to DB.</h5>
+               </div>
+      }
+      else if(this.state.success === null) {
+        return;
+      }
+      else {
+        return <div className="alert alert-danger" role="alert">
+                  <h5>Failed to add {this.state.name} to DB.</h5>
+               </div>
+      }
+    }
 
   handleNameChange(event) {
     this.setState({
@@ -38,9 +70,9 @@ class AddUser extends Component {
 
   handleColourChange(event) {
     this.setState({
-      colour: event.target.value
+      fave_colour: event.target.value
     });
-    console.log(this.state.colour);
+    console.log(this.state.fave_colour);
   }
 
   render() {
@@ -48,13 +80,14 @@ class AddUser extends Component {
       <div className="container margined-container">
         <h1 className="add-heading">Enter your name and favourite colour</h1>
 
-
-          <input type="text" className="form-control add-input" placeholder="Name" value={this.state.name}
-          onChange={this.handleNameChange}/>
+          {this.showNotification()}
 
 
-        <input type="text" className="form-control add-input" placeholder="Favourite Colour" value={this.state.colour}
-        onChange={this.handleColourChange}/>
+          <input type="text" className="form-control add-input" placeholder="Name"
+            value={this.state.name} onChange={this.handleNameChange}/>
+
+          <input type="text" className="form-control add-input" placeholder="Favourite Colour"
+            value={this.state.fave_colour} onChange={this.handleColourChange}/>
 
         <button className="btn btn-info" onClick={this.addUserToDB}>Add my info!</button>
 

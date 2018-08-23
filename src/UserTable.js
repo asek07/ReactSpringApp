@@ -13,7 +13,20 @@ class UserTable extends Component {
 
   componentWillMount() {
 
-// axios
+    // axios
+    fetch("http://localhost:8080/allusers")
+    .then(results => {
+      return results.json();
+    })
+    .then(data => {
+      this.setState({
+        users: data
+      })
+      console.log("users", this.state.users);
+    });
+  }
+
+  getUsers() {
     fetch("http://localhost:8080/allusers")
     .then(results => {
       return results.json();
