@@ -19,7 +19,9 @@ class AddUser extends Component {
   }
 
   addUserToDB() {
-    if(this.state.name !== "" && this.state.fave_colour !== "") {
+    let inputName = this.state.name.trim();
+    let inputColour = this.state.fave_colour.trim();
+    if(inputName !== "" && inputColour !== "") {
       fetch('http://localhost:8080/users/addUser?name=' + this.state.name +"&fave_colour=" + this.state.fave_colour, {
        method: 'POST',
        body: {
@@ -41,14 +43,17 @@ class AddUser extends Component {
 
      }
      else {
-       console.log("not working for some reason...");
+       this.setState({
+         name: "",
+         fave_colour: ""
+       })
      }
     }
 
     showNotification() {
       if(this.state.success === true) {
         return <div className="alert alert-success" role="alert">
-                  <h5>Successfully added {this.state.name} to DB.</h5>
+                  <h6 className="notification-message">Successfully added {this.state.name} to DB.</h6>
                </div>
       }
       else if(this.state.success === null) {
@@ -56,7 +61,7 @@ class AddUser extends Component {
       }
       else {
         return <div className="alert alert-danger" role="alert">
-                  <h5>Failed to add {this.state.name} to DB.</h5>
+                  <h6 className="notification-message">Failed to add {this.state.name} to DB.</h6>
                </div>
       }
     }
@@ -82,7 +87,6 @@ class AddUser extends Component {
             <h1 className="add-heading">Enter your name and favourite colour</h1>
 
               {this.showNotification()}
-
 
               <input type="text" className="form-control add-input" placeholder="Name"
                 value={this.state.name} onChange={this.handleNameChange}/>

@@ -65,7 +65,7 @@ class UserTable extends Component {
     showNotification() {
       if(this.state.success === true) {
         return <div className="alert alert-success" role="alert">
-                  <h5>Successfully deleted user from database.</h5>
+                  <h5 className="notification-message">Successfully deleted user from database.</h5>
                </div>
       }
       else if(this.state.success === null) {
@@ -73,7 +73,7 @@ class UserTable extends Component {
       }
       else {
         return <div className="alert alert-danger" role="alert">
-                  <h5>Failed to delete user from database.</h5>
+                  <h5 className="notification-message">Failed to delete user from database.</h5>
                </div>
       }
     }
@@ -90,7 +90,9 @@ show() {
                     <td className="col-sm-4 text-left">{user.name}</td>
                     <td className="col-sm-4 text-left">{user.fave_colour}</td>
                     <td className="col-sm-1 text-left">
-                      <button className="btn btn-warning" onClick={() => this.deleteUser(user.user_id)}>Delete</button>
+                      <button className="btn btn-warning" onClick={() => this.deleteUser(user.user_id)}>
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                      </button>
                     </td>
 
                </tr>
