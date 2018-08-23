@@ -10,10 +10,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-
-        <AddUser />
-        <UserTable />
+      <div className="container margined-container">
+        <div className="row">
+          <AddUser />
+          <UserTable />
+        </div>
       </div>
     );
   }

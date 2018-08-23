@@ -77,22 +77,24 @@ class AddUser extends Component {
 
   render() {
     return (
-      <div className="container margined-container">
-        <h1 className="add-heading">Enter your name and favourite colour</h1>
 
-          {this.showNotification()}
+          <div className="col-md-6 col-lg-6">
+            <h1 className="add-heading">Enter your name and favourite colour</h1>
 
-
-          <input type="text" className="form-control add-input" placeholder="Name"
-            value={this.state.name} onChange={this.handleNameChange}/>
-
-          <input type="text" className="form-control add-input" placeholder="Favourite Colour"
-            value={this.state.fave_colour} onChange={this.handleColourChange}/>
-
-        <button className="btn btn-info" onClick={this.addUserToDB}>Add my info!</button>
+              {this.showNotification()}
 
 
-      </div>
+              <input type="text" className="form-control add-input" placeholder="Name"
+                value={this.state.name} onChange={this.handleNameChange}/>
+
+              <input type="text" className="form-control add-input" placeholder="Favourite Colour"
+                value={this.state.fave_colour} onChange={this.handleColourChange}/>
+
+            <button className="btn btn-info" onClick={this.addUserToDB}>Add my info!</button>
+
+
+          </div>
+
     );
   }
 }
